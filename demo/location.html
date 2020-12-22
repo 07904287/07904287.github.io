@@ -14,9 +14,31 @@
 
   <script type="text/javascript">
 
-let myDate = new Date(2012, 01, 12);
-Celestial.skyview({date:myDate, location:[47.487, 19.026], timezone: 0})
+    $( "#color, #new-date" ).change(function() {
+        let bg = $('#color').val();
+        let d = $('#new-date').val();
+        updateMap(bg, d)
+    });
 
+    function updateMap(bg, d) {
+        let config = {
+            center: [14,56,0],
+            background: {
+                fill: bg
+            }
+
+        };
+        // Correct javascript date format
+        let date = new Date(d);
+        // Set the Celestial date
+        Celestial.date(date);
+
+        // Go right and left for the animation bug
+        $('#day-right').click();
+        $('#day-left').click();
+
+        Celestial.apply(config);
+    }
   </script>
 
   <footer id="d3-celestial-footer">
